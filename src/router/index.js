@@ -8,6 +8,9 @@ import Register from '@/pages/auth/Register.vue'
 import ForgotPassword from '@/pages/auth/ForgotPassword.vue'
 import ResetPassword from '@/pages/auth/ResetPassword.vue'
 import VerifyEmail from '@/pages/auth/VerifyEmail.vue'
+import EmployeeList from '@/pages/employee/EmployeeList.vue'
+import EmployeeInfo from '@/pages/employee/EmployeeInfo.vue'
+import EmployeeRegister from '@/pages/employee/EmployeeRegister.vue'
 
 const APP_NAME = import.meta.env.VITE_APP_NAME
 
@@ -72,6 +75,33 @@ const routes = [
             title: 'Register',
             guard: 'guest',
         },
+    },
+    {
+        path: '/employeelist',
+        name: 'employeelist',
+        component: EmployeeList,
+        meta: {
+            title: 'EmployeeList',
+            guard: 'auth',
+        },
+    },
+    {
+        path: '/employeeinfo',
+        name: 'employeeinfo',
+        component: EmployeeInfo,
+        meta: {
+            title: 'EmployeeInfo',
+            guard: 'auth',
+        },
+    },
+    {
+        path: '/employeeregister',
+        name: 'employeeregister',
+        component: EmployeeRegister,
+        meta: {
+            title: 'EmployeeRegister',
+            guard: 'auth',
+        }
     },
     {
         path: '/forgot-password',

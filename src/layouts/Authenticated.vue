@@ -55,10 +55,25 @@ const submitLogout = () => {
                                     </BreezeNavLink>
                                 </router-link>
                             </div>
+                            
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <router-link
+                                    to="/employeelist"
+                                    custom
+                                    v-slot="{ href, isActive, navigate }">
+                                    <BreezeNavLink
+                                        :href="href"
+                                        :active="isActive"
+                                        @click="navigate">
+                                        EmployeeList
+                                    </BreezeNavLink>
+                                </router-link>
+                            </div>
                             <div class="ml-3 relative">
                                 <BreezeDropdown align="right" width="48">
                                     <template #trigger>

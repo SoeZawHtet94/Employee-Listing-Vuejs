@@ -13,7 +13,7 @@ import BreezeAuthenticatedLayout from '@/layouts/Authenticated.vue'
                             class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
                             role="alert"
                             v-if="errors && errors.length">
-                            <div class="flex" v-for="error of errors" :key="error">
+                            <div class="flex" v-for="(error,index) of errors" :key="index">
                                 <div class="py-1">
                                     <svg
                                         class="fill-current h-6 w-6 text-teal-500 mr-4"
@@ -30,11 +30,12 @@ import BreezeAuthenticatedLayout from '@/layouts/Authenticated.vue'
                                 </div>
                             </div>
                         </div>
-                        <table
-                            class="table-auto w-full"
-                            v-if="employeeData && employeeData.length">
+                        <table class="table-auto w-full" v-if="employee">
                             <thead class="border-b">
                                 <tr class="bg-gray-100">
+                                    <th class="text-left p-4 font-medium">
+                                        ID
+                                    </th>
                                     <th class="text-left p-4 font-medium">
                                         Name
                                     </th>
@@ -44,26 +45,14 @@ import BreezeAuthenticatedLayout from '@/layouts/Authenticated.vue'
                                     <th class="text-left p-4 font-medium">
                                         Role
                                     </th>
-                                    <th class="text-left p-4 font-medium">
-                                        Action
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    class="border-b hover:bg-gray-50"
-                                    v-for="employee of employeeData" :key="employee">
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="p-4">{{ employee.id }}</td>
                                     <td class="p-4">{{ employee.name }}</td>
                                     <td class="p-4">{{ employee.email }}</td>
                                     <td class="p-4">{{ employee.phone }}</td>
-                                    <td class="p-4"> 
-                                        <router-link
-                                            :to="`/employee/${employee.phone}`"
-                                            class="underline text-sm text-gray-600 hover:text-gray-900">
-                                            Edit
-                                        </router-link>
-                                    </td>
-                                    <!-- <a href="/employee/1"><td class="p-4">Edit</td></a> -->
                                 </tr>
                             </tbody>
                         </table>
@@ -75,11 +64,10 @@ import BreezeAuthenticatedLayout from '@/layouts/Authenticated.vue'
 </template>
 <script>
 import axios from '@/lib/axios'
-
 export default {
     data() {
         return {
-            employeeData: [],
+            employee: {},
             errors: [],
         }
     },
@@ -87,10 +75,10 @@ export default {
     // Fetches posts when the component is created.
     created() {
         axios
-            .get(`/api/employee`)
+            .get(`/api/employee/` + this.$route.params.id)
             .then(response => {
                 if (response.data.status === 'OK') {
-                    this.employeeData = response.data.employee
+                    this.employee = response.data.employee
                 } else {
                     this.errors.push('No Data Found')
                 }

@@ -9,7 +9,7 @@ import ForgotPassword from '@/pages/auth/ForgotPassword.vue'
 import ResetPassword from '@/pages/auth/ResetPassword.vue'
 import VerifyEmail from '@/pages/auth/VerifyEmail.vue'
 import EmployeeList from '@/pages/employee/EmployeeList.vue'
-import EmployeeInfo from '@/pages/employee/EmployeeInfo.vue'
+import EmployeeDetail from '@/pages/employee/EmployeeDetail.vue'
 import EmployeeRegister from '@/pages/employee/EmployeeRegister.vue'
 
 const APP_NAME = import.meta.env.VITE_APP_NAME
@@ -56,6 +56,33 @@ const routes = [
         },
     },
     {
+        path: '/employee-list',
+        name: 'employeelist',
+        component: EmployeeList,
+        meta: {
+            title: 'EmployeeList',
+            guard: 'auth',
+        },
+    },
+    {
+        path: '/employee/:id',
+        name: 'employee-details',
+        component: EmployeeDetail,
+        meta: {
+            title: 'Employee Details',
+            guard: 'auth',
+        },
+    },
+    {
+        path: '/employee-register',
+        name: 'employee-register',
+        component: EmployeeRegister,
+        meta: {
+            title: 'Employee Eegister',
+            guard: 'auth',
+        },
+    },
+    {
         path: '/login',
         name: 'login',
         component: Login,
@@ -75,33 +102,6 @@ const routes = [
             title: 'Register',
             guard: 'guest',
         },
-    },
-    {
-        path: '/employeelist',
-        name: 'employeelist',
-        component: EmployeeList,
-        meta: {
-            title: 'EmployeeList',
-            guard: 'auth',
-        },
-    },
-    {
-        path: '/employeeinfo',
-        name: 'employeeinfo',
-        component: EmployeeInfo,
-        meta: {
-            title: 'EmployeeInfo',
-            guard: 'auth',
-        },
-    },
-    {
-        path: '/employeeregister',
-        name: 'employeeregister',
-        component: EmployeeRegister,
-        meta: {
-            title: 'EmployeeRegister',
-            guard: 'auth',
-        }
     },
     {
         path: '/forgot-password',

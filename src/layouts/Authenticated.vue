@@ -60,18 +60,30 @@ const submitLogout = () => {
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div class="pt-2 pb-3 space-y-1">
                                 <router-link
-                                    to="/employeelist"
+                                    to="/employee-list"
                                     custom
                                     v-slot="{ href, isActive, navigate }">
-                                    <BreezeNavLink
+                                    <BreezeResponsiveNavLink
                                         :href="href"
                                         :active="isActive"
                                         @click="navigate">
-                                        EmployeeList
-                                    </BreezeNavLink>
+                                        Employee List
+                                    </BreezeResponsiveNavLink>
+                                </router-link>
+                            </div>
+                            <div class="pt-2 pb-3 space-y-1">
+                                <router-link
+                                    to="/employee-register"
+                                    custom
+                                    v-slot="{ href, isActive, navigate }">
+                                    <BreezeResponsiveNavLink
+                                        :href="href"
+                                        :active="isActive"
+                                        @click="navigate">
+                                        Employee Register
+                                    </BreezeResponsiveNavLink>
                                 </router-link>
                             </div>
                             <div class="ml-3 relative">

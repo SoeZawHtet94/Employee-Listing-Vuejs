@@ -9,7 +9,7 @@
                             class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
                             role="alert"
                             v-if="errors && errors.length">
-                            <div class="flex" v-for="error of errors">
+                            <div class="flex" v-for="error of errors" :key="error">
                                 <div class="py-1">
                                     <svg
                                         class="fill-current h-6 w-6 text-teal-500 mr-4"
@@ -46,17 +46,94 @@
                                 <div class="mb-4">
                                     <label
                                         class="block text-gray-700 text-sm font-bold mb-2"
-                                        for="username">
+                                        for="email">
                                         Email
                                     </label>
                                     <input
                                         v-model="email"
                                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        id="username"
+                                        id="email"
                                         type="text"
-                                        placeholder="Username" />
+                                        placeholder="Email" />
                                 </div>
-
+                                <div class="mb-4">
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="dateofbirth">
+                                        Date of Birth
+                                    </label>
+                                    <input
+                                        v-model="dateofbirth"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="dateofbirth"
+                                        type="Date"
+                                        placeholder="Date of Birth" />
+                                </div>
+                                <div class="mb-4">
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="phno">
+                                        Phone No
+                                    </label>
+                                    <input
+                                        v-model="phno"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="phno"
+                                        type="text"
+                                        placeholder="Phone No" />
+                                </div>
+                                <div class="mb-4">
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="nrcno">
+                                        NRC No
+                                    </label>
+                                    <input
+                                        v-model="nrcno"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="nrcno"
+                                        type="text"
+                                        placeholder="NRC No" />
+                                </div>
+                                <div class="mb-4">
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="address">
+                                        Address
+                                    </label>
+                                    <input
+                                        v-model="address"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="address"
+                                        type="text"
+                                        placeholder="Address" />
+                                </div>
+                                <div class="mb-4">
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="gender">
+                                        Gender
+                                    </label>
+                                    <select  v-model="gender"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="gender" >
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label
+                                        class="block text-gray-700 text-sm font-bold mb-2"
+                                        for="maritualstatus">
+                                        Maritual Status
+                                    </label>
+                                    <select  v-model="maritualstatus"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="maritualstatus" >
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                    </select>
+                                </div>
                                 <div class="flex items-center justify-between">
                                     <button
                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -81,6 +158,12 @@ export default {
         return {
             name: '',
             email: '',
+            dateofbirth: '',
+            phno: '',
+            nrcno: '',
+            address: '',
+            gender: '',
+            maritualstatus: '',
             errors: [],
         }
     },
@@ -92,6 +175,12 @@ export default {
                 .post(`api/employee-register`, {
                     name: this.name,
                     email: this.email,
+                    phno: this.phno,
+                    dateofbirth: this.dateofbirth,
+                    nrcno: this.nrcno,
+                    address: this.address,
+                    gender: this.gender,
+                    maritualstatus: this.maritualstatus,
                 })
                 .then(response => {
                     this.$router.push({ path: '/employee-list' })

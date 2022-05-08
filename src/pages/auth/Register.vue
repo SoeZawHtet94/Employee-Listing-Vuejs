@@ -31,6 +31,28 @@ const submitRegister = () => {
 <template>
     <BreezeGuestLayout>
         <BreezeValidationErrors class="mb-4" :errors="errors" />
+        
+        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+            <router-link
+                v-if="auth"
+                to="/dashboard"
+                class="text-sm text-gray-700 underline">
+                Dashboard
+            </router-link>
+
+            <template v-else>
+                <router-link
+                    to="/login"
+                    class="ml-4 text-sm text-gray-700 underline">
+                    Log in
+                </router-link>
+                <router-link
+                    to="/register"
+                    class="ml-4 text-sm text-gray-700 underline">
+                    Register
+                </router-link>
+            </template>
+        </div>
 
         <form @submit.prevent="submitRegister">
             <div>

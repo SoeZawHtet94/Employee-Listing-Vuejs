@@ -13,7 +13,7 @@ import EmployeeDetail from '@/pages/employee/EmployeeDetail.vue'
 import EmployeeRegister from '@/pages/employee/EmployeeRegister.vue'
 
 const APP_NAME = import.meta.env.VITE_APP_NAME
-
+console.log(APP_NAME);
 const routes = [
     {
         path: '/',

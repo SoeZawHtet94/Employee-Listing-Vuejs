@@ -1,3 +1,4 @@
+
 <template>
     <BreezeAuthenticatedLayout>
         <!-- component -->
@@ -183,7 +184,15 @@ export default {
                     maritualstatus: this.maritualstatus,
                 })
                 .then(response => {
-                    this.$router.push({ path: '/employee-list' })
+                    console.log(response.data);
+                    if(response.data.status === 'OK'){
+                        console.log("emp list");
+                        this.$router.push({ path: '/employee-list' })
+                    } else {
+                        this.errors = [];
+                        this.errors.push(response.data.message)
+                    }
+                   
                 })
                 .catch(e => {
                     this.errors.push(e)

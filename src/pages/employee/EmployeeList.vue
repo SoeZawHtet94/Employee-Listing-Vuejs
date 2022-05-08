@@ -42,7 +42,10 @@ import BreezeAuthenticatedLayout from '@/layouts/Authenticated.vue'
                                         Email
                                     </th>
                                     <th class="text-left p-4 font-medium">
-                                        Role
+                                        Phone
+                                    </th>
+                                    <th class="text-left p-4 font-medium">
+                                        Address
                                     </th>
                                     <th class="text-left p-4 font-medium">
                                         Action
@@ -55,15 +58,13 @@ import BreezeAuthenticatedLayout from '@/layouts/Authenticated.vue'
                                     v-for="employee of employeeData" :key="employee">
                                     <td class="p-4">{{ employee.name }}</td>
                                     <td class="p-4">{{ employee.email }}</td>
-                                    <td class="p-4">{{ employee.phone }}</td>
+                                    <td class="p-4">{{ employee.phone_no }}</td>
+                                    <td class="p-4">{{ employee.address }}</td>
                                     <td class="p-4"> 
-                                        <router-link
-                                            :to="`/employee/${employee.phone}`"
-                                            class="underline text-sm text-gray-600 hover:text-gray-900">
-                                            Edit
-                                        </router-link>
+                                        <a :href="`/employee/${employee.id}`" id="edit" class="edit">Edit</a>
+                                        <a :href="`/employee/${employee.id}`" id="detail"  class="detail">Detail</a>
+                                        <a @click="empdelete(employee.id)" href="" id="delete"  class="delete">delete</a>
                                     </td>
-                                    <!-- <a href="/employee/1"><td class="p-4">Edit</td></a> -->
                                 </tr>
                             </tbody>
                         </table>
@@ -87,7 +88,7 @@ export default {
     // Fetches posts when the component is created.
     created() {
         axios
-            .get(`/api/employee`)
+            .get(`/api/employee-list`)
             .then(response => {
                 if (response.data.status === 'OK') {
                     this.employeeData = response.data.employee
@@ -99,5 +100,39 @@ export default {
                 this.errors.push(e)
             })
     },
+
+    methods: {
+        // Pushes posts to the server when called.
+        empdelete(employeeid) {
+            console.log(employeeid)
+            axios
+                .delete(`/api/employee-delete/` + employeeid)
+                .then(response => {
+                    if(response.data.status === 'OK'){
+                        this.$router.push({ path: '/employee-list' })
+                    } else {
+                        this.errors = [];
+                        this.errors.push(response.data.message)
+                    }
+                   
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+        },
+    },
+
 }
 </script>
+
+<style >
+.delete {
+  color:#f11313;
+}
+.detail {
+  color:#392cf0;
+}
+.edit {
+  color:#0ae745;
+}
+</style>
